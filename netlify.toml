@@ -1,0 +1,46 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# Redirect all routes to index.html for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Custom 404 page
+[[redirects]]
+  from = ""
+  to = "/404.html"
+  status = 404
+
+# Security and caching headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=3600"
+
+# Cache static assets longer
+[[headers]]
+  for = "/favicon*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/apple-touch-icon*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # १. Netlify चा default SAMEORIGIN काढण्यासाठी हे रिकामे करा:
+    X-Frame-Options = ""
+    
+    # २. फक्त तुमच्या portfolio domains ला embed करण्याची परवानगी द्या:
+    Content-Security-Policy = "frame-ancestors 'self' https://ganeshraut.vercel.app/ http://localhost:3000/ https://ganesharaut.in/"

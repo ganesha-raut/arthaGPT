@@ -1,0 +1,20 @@
+{
+  "name": "Astra GPT - Advanced AI Chatbot",
+  "short_name": "Astra GPT",
+  "description": "Free AI-powered chatbot for coding help, study assistance, and creative projects",
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "education"]
+}

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astra GPT – Powerful AI Chatbot | Smart AI Assistant</title>
+
+    <meta name="description"
+        content="Astra GPT is a powerful AI chatbot with smart conversation, coding help, study assistance and automation support. Fast, responsive and AI powered.">
+    <meta name="keywords" content="Astra GPT, AI chatbot, AI assistant, chatbot website, GPT AI">
+    <meta property="og:title" content="Astra GPT – AI Chatbot">
+    <meta property="og:description" content="Smart fast AI chatbot for everyone">
+    <meta property="og:image" content="https://astra-gpt.netlify.app/astra.png">
+    <meta property="og:image" content="https://astra-gpt.netlify.app/favicon-32x32.png">
+    <meta property="og:type" content="website">
+
+
+    <link rel="apple-touch-icon" sizes="512x512" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="theme-color" content="#ffffff">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <!-- Tailwind (Utility) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Astra GPT",
+    "applicationCategory": "AI Chatbot",
+    "operatingSystem": "Web",
+    "description": "Astra GPT is an advanced AI chatbot."
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --sidebar-bg: rgba(15, 23, 42, 0.6);
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --border-color: rgba(148, 163, 184, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #3b82f6;
+            /* Blue default */
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --user-msg-bg: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --bot-msg-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        /* Themes */
+        [data-theme="emerald"] {
+            --accent-color: #10b981;
+            --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --user-msg-bg: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        [data-theme="rose"] {
+            --accent-color: #f43f5e;
+            --accent-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            --user-msg-bg: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+        }
+
+        [data-theme="amber"] {
+            --accent-color: #f59e0b;
+            --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --user-msg-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(244, 63, 94, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            overflow: hidden;
+            /* Prevent body scroll */
+            transition: all 0.3s ease;
+            height: 100vh;
+            /* Fallback */
+            height: 100dvh;
+            /* Mobile fix */
+        }
+
+        /* Glassmorphism Classes */
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+        }
+
+        .glass-sidebar {
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px -3px var(--accent-color);
+            }
+
+            50% {
+                box-shadow: 0 0 25px -3px var(--accent-color);
+            }
+        }
+
+        .typing-dot {
+            animation: bounce 1.4s infinite ease-in-out both;
+            background: var(--accent-color);
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Typography & Markdown Defaults */
+        /* Typography & Markdown Defaults */
+        .prose>* {
+            margin-bottom: 1em;
+        }
+
+        .prose pre {
+            background: #1e1e1e !important;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1em 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .code-header {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .code-copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .prose code {
+            font-family: 'Fira Code', monospace;
+            display: block;
+            padding: 1em;
+            /* Add padding back to code area */
+            overflow-x: auto;
+            color: #e2e8f0;
+        }
+
+        .prose :not(pre)>code {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: #e2e8f0;
+        }
+
+        .prose p {
+            margin-bottom: 0.8em;
+            line-height: 1.7;
+            color: #e2e8f0;
+            /* Soft white */
+        }
+
+        .prose strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .prose h1,
+        .prose h2,
+        .prose h3,
+        .prose h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: white;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .prose h1 {
+            font-size: 1.75em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        .prose h2 {
+            font-size: 1.5em;
+        }
+
+        .prose h3 {
+            font-size: 1.25em;
+        }
+
+        .prose ul,
+        .prose ol {
+            padding-left: 1.5em;
+            margin-bottom: 1em;
+            color: #e2e8f0;
+        }
+
+        .prose ul {
+            list-style-type: disc;
+        }
+
+        .prose ol {
+            list-style-type: decimal;
+        }
+
+        .prose li {
+            margin-bottom: 0.3em;
+        }
+
+        .prose a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .prose a:hover {
+            border-color: var(--accent-color);
+        }
+
+        .prose blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1em;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.5em 1em;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        .prose table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .prose th,
+        .prose td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+            color: #e2e8f0;
+        }
+
+        .prose th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+            color: white;
+        }
+
+        .prose hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2em 0;
+        }
+
+        /* Components */
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            transition: filter 0.2s;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(110%);
+        }
+
+        .chat-list-item {
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .chat-list-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-list-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .message {
+            max-width: 85%;
+        }
+
+        .message.bot {
+            background: var(--bot-msg-bg);
+            border-radius: 0 16px 16px 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .message.user {
+            background: var(--user-msg-bg);
+            border-radius: 16px 0 16px 16px;
+            margin-left: auto;
+            max-width: 85%;
+            /* Mobile friendly default */
+            width: fit-content;
+            /* Don't stretch */
+            word-wrap: break-word;
+            /* Prevent overflow */
+        }
+
+        @media (max-width: 768px) {
+            .message.user {
+                max-width: 85%;
+            }
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            gap: 10px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.open {
+            display: flex;
+            animation: fadeIn 0.2s;
+        }
+    </style>
+</head>
+
+<body class="h-[100dvh] flex text-sm md:text-base overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside
+        class="w-64 glass-sidebar flex flex-col z-20 transition-transform duration-300 absolute md:relative -translate-x-full md:translate-x-0"
+        id="sidebar">
+        <div class="p-4 flex items-center gap-3 border-b border-white/5">
+            <div
+                class="w-8 h-8 rounded-lg border-radius-50 from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                <img src="astra.png" style="border-radius: 50%;" alt="">
+            </div>
+            <h1
+                class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                Astra GPT</h1>
+        </div>
+
+        <div class="p-3 space-y-2">
+            <button onclick="newChat()"
+                class="btn-primary w-full py-2.5 px-4 rounded-xl font-medium shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus"></i> New Chat
+            </button>
+            <button onclick="toggleView('gallery')"
+                class="w-full py-2.5 px-4 rounded-xl font-medium glass hover:bg-white/5 text-gray-300 flex items-center justify-center gap-2 transition-colors">
+                <i class="fa-solid fa-images"></i> Gallery
+            </button>
+        </div>
+
+        <div class="px-4 pt-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">History</div>
+        <div id="chatList" class="flex-1 overflow-y-auto p-3 space-y-1">
+            <!-- Chat items -->
+        </div>
+
+        <!-- Settings / Themes -->
+        <div class="p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] border-t border-white/5 bg-black/20">
+            <div class="text-xs text-gray-400 mb-2 px-1">THEME</div>
+            <div class="flex gap-2 px-1">
+                <button onclick="setTheme('default')"
+                    class="w-6 h-6 rounded-full bg-blue-500 hover:ring-2 ring-white transition"></button>
+                <button onclick="setTheme('emerald')"
+                    class="w-6 h-6 rounded-full bg-emerald-500 hover:ring-2 ring-white transition"></button>
+                <button onclick="setTheme('rose')"
+                    class="w-6 h-6 rounded-full bg-rose-500 hover:ring-2 ring-white transition"></button>
+                <button onclick="setTheme('amber')"
+                    class="w-6 h-6 rounded-full bg-amber-500 hover:ring-2 ring-white transition"></button>
+            </div>
+
+            <button onclick="clearAllData()"
+                class="mt-4 w-full text-xs text-red-400 hover:text-red-300 flex items-center gap-2 px-1">
+                <i class="fa-solid fa-trash"></i> Clear All Data
+            </button>
+        </div>
+    </aside>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="sidebarOverlay" onclick="toggleSidebar()"
+        class="fixed inset-0 bg-black/50 z-10 md:hidden hidden backdrop-blur-sm"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col relative h-full overflow-hidden w-full">
+        <!-- HEADER -->
+        <header class="h-16 glass flex items-center justify-between px-4 md:px-6 z-10 w-full shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><i
+                        class="fa-solid fa-bars text-xl"></i></button>
+                <h2 id="headerTitle" class="font-semibold text-lg truncate max-w-[200px] md:max-w-md">New Chat</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="exportChatPDF()"
+                    class="w-9 h-9 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition"
+                    title="Export to PDF">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+                <button onclick="toggleSidebar()"
+                    class="hidden md:hidden w-9 h-9 rounded-full glass flex items-center justify-center text-gray-400"><i
+                        class="fa-solid fa-cog"></i></button>
+            </div>
+        </header>
+
+        <!-- WELCOME TEMPLATE -->
+        <template id="welcome-template">
+            <div
+                class="flex flex-col items-center justify-center h-full text-center text-gray-400 opacity-80 w-full animate-fade-in">
+                <div
+                    class="w-20 h-20 rounded-2xl  from-blue-500/20 to-purple-600/20 flex items-center justify-center mb-4 ">
+                    <img src="astra.png" alt="">
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">How can I help you?</h3>
+                <p class="max-w-md">I can write code, generate images, analyze text, and export our conversation to PDF.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8 w-full max-w-lg text-left">
+                    <button onclick="setInput('/image a futuristic city')"
+                        class="glass p-3 rounded-xl hover:bg-white/5 transition flex items-center">
+                        <i class="fa-solid fa-image text-purple-400 mr-2"></i> <span>Generate Image</span>
+                    </button>
+                    <button onclick="setInput('Write a Python script to scrape a website')"
+                        class="glass p-3 rounded-xl hover:bg-white/5 transition flex items-center">
+                        <i class="fa-brands fa-python text-yellow-400 mr-2"></i> <span>Python Script</span>
+                    </button>
+                    <button onclick="setInput('Explain Quantum Physics in simple terms')"
+                        class="glass p-3 rounded-xl hover:bg-white/5 transition flex items-center">
+                        <i class="fa-solid fa-atom text-blue-400 mr-2"></i> <span>Explain Science</span>
+                    </button>
+                    <button onclick="setInput('Create a marketing plan for a coffee shop')"
+                        class="glass p-3 rounded-xl hover:bg-white/5 transition flex items-center">
+                        <i class="fa-solid fa-bullhorn text-pink-400 mr-2"></i> <span>Marketing Plan</span>
+                    </button>
+                </div>
+            </div>
+        </template>
+
+        <!-- CHAT VIEW -->
+        <div id="view-chat" class="flex-1 flex flex-col overflow-hidden relative w-full">
+            <div id="chatbox" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scroll-smooth w-full">
+                <!-- Chat content goes here -->
+            </div>
+
+            <!-- INPUT AREA -->
+            <div
+                class="p-4 md:p-6 pb-6 md:pb-6 mb-6 md:mb-0 safe-pb glass border-t border-t-white/5 w-full shrink-0 z-20">
+                <div class="relative max-w-4xl mx-auto">
+                    <div id="typing-indicator"
+                        class="hidden absolute -top-8 left-0 text-xs text-muted flex items-center gap-1 pl-2">
+                        <span class="typing-dot w-1.5 h-1.5 rounded-full"></span>
+                        <span class="typing-dot w-1.5 h-1.5 rounded-full"></span>
+                        <span class="typing-dot w-1.5 h-1.5 rounded-full"></span>
+                    </div>
+
+                    <input type="text" id="userInput"
+                        class="w-full bg-black/30 border border-white/10 text-white rounded-xl py-3.5 pl-4 pr-32 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 placeholder-gray-500 transition-all shadow-inner"
+                        placeholder="Message Astra... (Type /image for images)" autocomplete="off">
+
+                    <div class="absolute right-2 top-2 flex gap-1">
+                        <button id="sendBtn"
+                            class="bg-blue-600 hover:bg-blue-500 text-white p-2 rounded-lg transition-colors w-9 h-9 flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center mt-2 text-[10px] text-gray-600">
+                    Astra can make mistakes. Consider checking important information.
+                </div>
+            </div>
+        </div>
+
+        <!-- GALLERY VIEW -->
+        <div id="view-gallery" class="flex-1 hidden overflow-y-auto p-6">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-palette text-purple-400"></i> Image Gallery
+            </h2>
+            <div id="galleryGrid" class="gallery-grid">
+                <!-- Gallery items will appear here -->
+            </div>
+            <div id="emptyGallery" class="hidden flex flex-col items-center justify-center h-64 text-gray-500">
+                <i class="fa-regular fa-images text-4xl mb-3"></i>
+                <p>No images generated yet.</p>
+                <p class="text-xs mt-1">Try sending "/image a cute cat"</p>
+            </div>
+        </div>
+
+    </main>
+
+    <style>
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .safe-pb {
+                padding-bottom: calc(2rem + env(safe-area-inset-bottom)) !important;
+            }
+
+            @media (min-width: 768px) {
+                .safe-pb {
+                    padding-bottom: 1.5rem !important;
+                    /* md:p-6 equivalency */
+                }
+            }
+        }
+    </style>
+
+    <!-- IMAGE MODAL -->
+    <div id="imgModal" class="modal" onclick="closeModal(event)">
+        <div class="relative max-w-4xl w-full p-4 flex flex-col items-center">
+            <button onclick="document.getElementById('imgModal').classList.remove('open')"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 text-white hover:bg-red-500/80 transition flex items-center justify-center">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <img id="modalImg" src="" class="max-h-[80vh] rounded-lg shadow-2xl border border-white/10">
+            <div class="flex gap-4 mt-4">
+                <button id="downloadBtn" class="btn-primary py-2 px-6 rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download
+                </button>
+                <button onclick="copyModalLink()"
+                    class="glass py-2 px-6 rounded-full hover:bg-white/10 flex items-center gap-2">
+                    <i class="fa-solid fa-link"></i> Copy URL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /******** SYSTEM PROMPT *********/
+        const SYS = `You are Astra GPT, an advanced, helpful, and creative assistant developed by Ganesh Raut.
+- You are an expert Full Stack Developer capable of building complex applications (e.g., E-commerce, Social Media).
+- When asked for code, provide DETAILED, step-by-step file outputs.
+- Do not summarize code; provide the FULL implementation.
+- For big projects, break down the response into logical steps and multiple files.
+- Aim for maximum detail and robustness in your code generation.
+- Format responses in clean, readable Markdown.
+- Use headers for sections.
+- Use code blocks with language tags for code.
+- If asking for an image, respond with "Generating image..." and context.`;
+
+        /******** API CONFIG *********/
+        const TEXT_API = "https://backend.buildpicoapps.com/aero/run/llm-api?pk=v1-Z0FBQUFBQnBVX2E1dmFoZXY0eFJQU1NZdnpQOUNKUmttQ1JfQ1J4SjRwS0dzQUE2UmwtSUdZS3lzdUlXSkxaTVRabUNhbEgwemF2TWJUVTV0enJjRG9NS2dVbFE2ekgtQ2c9PQ==";
+        const IMG_API = "https://backend.buildpicoapps.com/aero/run/image-generation-api?pk=v1-Z0FBQUFBQnBVX2E1dmFoZXY0eFJQU1NZdnpQOUNKUmttQ1JfQ1J4SjRwS0dzQUE2UmwtSUdZS3lzdUlXSkxaTVRabUNhbEgwemF2TWJUVTV0enJjRG9NS2dVbFE2ekgtQ2c9PQ==";
+
+        /******** STATE *********/
+        let chats = JSON.parse(localStorage.getItem("astra_chats_v2") || "[]");
+        let gallery = JSON.parse(localStorage.getItem("astra_gallery_v2") || "[]");
+        let dataset = localStorage.getItem("astra_dataset") || "";
+        let currentChat = null;
+        let currentTheme = localStorage.getItem("astra_theme") || "default";
+
+        /******** MARKED INIT *********/
+        marked.setOptions({ gfm: true, breaks: true });
+
+        /******** STARTUP *********/
+        document.addEventListener("DOMContentLoaded", () => {
+            applyTheme(currentTheme);
+            if (chats.length > 0) {
+                loadChat(chats[0].id);
+            } else {
+                newChat();
+            }
+            renderSidebar();
+
+            // Enter key
+            document.getElementById("userInput").addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            document.getElementById("sendBtn").onclick = sendMessage;
+        });
+
+        /******** THEME MANAGER *********/
+        function setTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem("astra_theme", theme);
+            applyTheme(theme);
+        }
+
+        function applyTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            // Visual feedback on buttons
+            const btns = document.querySelectorAll('[onclick^="setTheme"]');
+            btns.forEach(b => {
+                if (b.getAttribute('onclick').includes(theme)) {
+                    b.classList.add('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-transparent');
+                } else {
+                    b.classList.remove('ring-2', 'ring-white', 'ring-offset-2', 'ring-offset-transparent');
+                }
+            });
+        }
+
+        /******** NAVIGATION *********/
+        function toggleSidebar() {
+            const sb = document.getElementById("sidebar");
+            sb.classList.toggle("-translate-x-full");
+            const ov = document.getElementById("sidebarOverlay");
+            ov.classList.toggle("hidden");
+        }
+
+        function toggleView(view) {
+            document.getElementById("view-chat").classList.add("hidden");
+            document.getElementById("view-gallery").classList.add("hidden");
+            document.getElementById(`view-${view}`).classList.remove("hidden");
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 768) {
+                document.getElementById("sidebar").classList.add("-translate-x-full");
+                document.getElementById("sidebarOverlay").classList.add("hidden");
+            }
+
+            if (view === 'gallery') renderGallery();
+        }
+
+        function setInput(text) {
+            document.getElementById("userInput").value = text;
+            document.getElementById("userInput").focus();
+        }
+
+        /******** CHAT LOGIC *********/
+        function newChat() {
+            const id = Date.now();
+            const chat = { id, title: "New Chat", messages: [] };
+            chats.unshift(chat);
+            currentChat = chat;
+            saveData();
+            renderSidebar();
+            loadChat(id);
+            toggleView('chat');
+        }
+
+        function loadChat(id) {
+            currentChat = chats.find(c => c.id === id);
+            if (!currentChat) return newChat();
+
+            const box = document.getElementById("chatbox");
+            box.innerHTML = "";
+
+            // Welcome screen?
+            if (currentChat.messages.length === 0) {
+                // Clone from TEMPLATE
+                const tmpl = document.getElementById("welcome-template");
+                const clone = tmpl.content.cloneNode(true);
+                box.appendChild(clone);
+            }
+
+            currentChat.messages.forEach(msg => appendMessageUI(msg));
+
+            document.getElementById("headerTitle").innerText = currentChat.title;
+            renderSidebar();
+            toggleView('chat');
+            scrollToBottom();
+        }
+
+        function renderSidebar() {
+            const list = document.getElementById("chatList");
+            list.innerHTML = "";
+            chats.forEach(c => {
+                const div = document.createElement("div");
+                div.className = `chat-list-item p-3 rounded-lg cursor-pointer text-sm text-gray-300 flex justify-between items-center group ${currentChat && currentChat.id === c.id ? 'active' : ''}`;
+
+                // Title Area
+                const titleSpan = document.createElement("span");
+                titleSpan.className = "truncate flex-1";
+                titleSpan.innerHTML = `<i class="fa-regular fa-message mr-2 opacity-70"></i> ${c.title}`;
+
+                // Delete Button (visible on hover)
+                const delBtn = document.createElement("button");
+                delBtn.className = "opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-400 p-1 transition-opacity";
+                delBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+                delBtn.onclick = (e) => deleteChat(e, c.id);
+
+                div.appendChild(titleSpan);
+                div.appendChild(delBtn);
+
+                div.onclick = () => loadChat(c.id);
+                list.appendChild(div);
+            });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById("userInput");
+            const text = input.value.trim();
+            if (!text) return;
+
+            input.value = "";
+
+            // Remove welcome screen if present
+            const box = document.getElementById("chatbox");
+            if (currentChat.messages.length === 0) box.innerHTML = "";
+
+            // Add User Message
+            const userMsg = { role: 'user', content: text };
+            currentChat.messages.push(userMsg);
+            appendMessageUI(userMsg);
+
+            // Update title if new and trigger AI rename
+            if (currentChat.title === "New Chat") {
+                currentChat.title = text.slice(0, 30); // Temporary title
+                renderSidebar();
+                generateSmartTitle(text); // Async update
+            }
+
+            saveData();
+            scrollToBottom();
+
+            // Processing
+            document.getElementById("typing-indicator").classList.remove("hidden");
+
+            try {
+                const lowerText = text.toLowerCase();
+                if (lowerText.startsWith("/image")) {
+                    await handleImageGeneration(text.replace("/image", "").trim());
+                } else if (lowerText === "/forget") {
+                    dataset = "";
+                    localStorage.removeItem("astra_dataset");
+                    appendMessageUI({ role: 'bot', content: "I have cleared my local knowledge base." });
+                } else if (lowerText === "/dataset") {
+                    if (dataset) {
+                        appendMessageUI({ role: 'bot', content: "### My Current Knowledge:\n" + dataset });
+                    } else {
+                        appendMessageUI({ role: 'bot', content: "I don't have any custom knowledge saved yet. Just chat with me!" });
+                    }
+                } else {
+                    // Auto-learn: Save every message
+                    dataset = dataset ? dataset + "\n" + text : text;
+                    localStorage.setItem("astra_dataset", dataset);
+
+                    await handleTextGeneration(text);
+                }
+            } catch (e) {
+                appendMessageUI({ role: 'bot', content: "**Error:** " + e.message });
+            }
+
+            document.getElementById("typing-indicator").classList.add("hidden");
+            saveData();
+        }
+
+        // --- NEW FEATURES: Delete & AI Rename ---
+
+        function deleteChat(e, id) {
+            e.stopPropagation(); // Prevent clicking the chat item itself
+            if (!confirm("Delete this chat?")) return;
+
+            chats = chats.filter(c => c.id !== id);
+
+            // If we deleted the current chat, load another or create new
+            if (currentChat.id === id) {
+                if (chats.length > 0) loadChat(chats[0].id);
+                else newChat();
+            } else {
+                saveData();
+                renderSidebar();
+            }
+        }
+
+        async function generateSmartTitle(text) {
+            try {
+                // Determine API to use (same as text api)
+                const res = await fetch(TEXT_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt: `System: You are a title generator. Summarize the user's message into a very short, concise title (max 4-5 words). Do not use quotes.\nUser Message: ${text}\nTitle:`
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    currentChat.title = data.text.trim().replace(/^["']|["']$/g, ''); // Remove quotes if any
+                    saveData();
+                    renderSidebar();
+                }
+            } catch (e) {
+                
+                // Fallback is already handled (we set a slice title first)
+            }
+        }
+
+        // ----------------------------------------
+
+        async function handleTextGeneration(prompt) {
+            const history = currentChat.messages.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join("\n");
+
+            // Inject Dataset into System Prompt
+            let dynamicSys = SYS;
+            if (dataset) {
+                dynamicSys += `\n\n[USER PERSONAL KNOWLEDGE BASE]\n${dataset}\n[END KNOWLEDGE BASE]\nUse the above knowledge to answer if relevant.`;
+            }
+
+            // Improve system prompt context
+            const fullPrompt = `${dynamicSys}\n\n${history}\nAssistant:`;
+
+            const res = await fetch(TEXT_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: fullPrompt })
+            });
+
+            const data = await res.json();
+            if (data.status === 'success') {
+                const botMsg = { role: 'bot', content: data.text };
+                currentChat.messages.push(botMsg);
+                // Use stream flag for typing effect
+                appendMessageUI(botMsg, true);
+            } else {
+                throw new Error("API returned failure");
+            }
+        }
+
+        async function handleImageGeneration(prompt) {
+            const res = await fetch(IMG_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt })
+            });
+
+            const data = await res.json();
+            if (data.status === 'success') {
+                const imgUrl = data.imageUrl;
+                const botMsg = { role: 'bot', content: '![Generated Image](' + imgUrl + ')', isImage: true };
+                currentChat.messages.push(botMsg);
+                appendMessageUI(botMsg);
+
+                // Add to Gallery
+                gallery.unshift({ url: imgUrl, prompt: prompt, date: Date.now() });
+                localStorage.setItem("astra_gallery_v2", JSON.stringify(gallery));
+            } else {
+                throw new Error("Image generation failed");
+            }
+        }
+
+        async function appendMessageUI(msg, stream = false) {
+            const box = document.getElementById("chatbox");
+            const div = document.createElement("div");
+            div.className = `message ${msg.role} p-4 mb-4 text-white shadow-lg animate-fade-in prose prose-invert max-w-none`;
+
+            box.appendChild(div);
+
+            if (msg.role === 'bot' && !msg.isImage) {
+                if (stream) {
+                    // Streaming (Typewriter) Effect
+                    const words = msg.content.match(/(\s+|\S+)/g) || []; // Split by words keeping whitespaces
+                    let currentMarkdown = "";
+
+                    for (let i = 0; i < words.length; i++) {
+                        currentMarkdown += words[i];
+                        div.innerHTML = marked.parse(currentMarkdown);
+
+                        // Highlight code blocks during streaming (optional/expensive, but good for visuals)
+                        // We do it less frequently or at the end for performance, but here every word for smoothness
+                        div.querySelectorAll('pre code').forEach((block) => {
+                            hljs.highlightElement(block);
+                        });
+
+                        scrollToBottom();
+                        // Dynamic delay based on punctuation/length
+                        const delay = Math.random() * 10 + 5;
+                        await new Promise(r => setTimeout(r, delay));
+                    }
+                } else {
+                    // Instant Render (History load)
+                    div.innerHTML = marked.parse(msg.content);
+                }
+
+                // Post-process Code Blocks (Add Headers & Copy Buttons)
+                div.querySelectorAll('pre').forEach((pre) => {
+                    // Check if already processed (for history reload)
+                    if (pre.querySelector('.code-header')) return;
+
+                    const code = pre.querySelector('code');
+                    if (!code) return;
+
+                    // Detect language
+                    const langClass = Array.from(code.classList).find(c => c.startsWith('language-'));
+                    const lang = langClass ? langClass.replace('language-', '') : 'text';
+
+                    // Create Header
+                    const header = document.createElement('div');
+                    header.className = "code-header";
+                    header.innerHTML = `
+                        <span class="font-mono text-xs uppercase">${lang}</span>
+                        <div class="code-copy-btn text-xs flex items-center gap-1" onclick="copyCode(this)">
+                            <i class="fa-regular fa-copy"></i> 
+                        </div>
+                    `;
+
+                    // Insert header before code
+                    pre.insertBefore(header, code);
+
+                    // Highlight again to be sure
+                    hljs.highlightElement(code);
+                });
+
+            } else if (msg.isImage) {
+                // Extract URL from markdown format ![...](url)
+                const urlMatch = msg.content.match(/\((.*?)\)/);
+                const url = urlMatch ? urlMatch[1] : '';
+                div.innerHTML = `
+            <div class="rounded-lg overflow-hidden border border-white/20">
+            <img src="${url}" class="w-full h-auto cursor-pointer" onclick="openModal('${url}')">
+                <div class="px-3 py-2 bg-black/40 flex justify-between items-center text-xs">
+                    <span>Generated Image</span>
+                    <button onclick="downloadImage('${url}')" class="text-blue-400 hover:text-blue-300"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>`;
+            } else {
+                div.innerText = msg.content;
+            }
+
+            if (stream) {
+                scrollToBottom(false); // Smart scroll during streaming
+            } else {
+                scrollToBottom(true); // Force scroll on new message start/end
+            }
+        }
+
+        function copyCode(btn) {
+            const pre = btn.closest('pre');
+            const code = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check text-green-400"></i> Copied!`;
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 2000);
+            });
+        }
+
+        /******** GALLERY *********/
+        function renderGallery() {
+            const grid = document.getElementById("galleryGrid");
+            grid.innerHTML = "";
+
+            if (gallery.length === 0) {
+                document.getElementById("emptyGallery").classList.remove("hidden");
+                return;
+            }
+            document.getElementById("emptyGallery").classList.add("hidden");
+
+            gallery.forEach(item => {
+                const el = document.createElement("div");
+                el.className = "gallery-item";
+                el.innerHTML = `
+            <img src="${item.url}" loading="lazy">
+            <div class="gallery-overlay">
+                <button onclick="openModal('${item.url}')" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white flex items-center justify-center transition"><i class="fa-solid fa-eye"></i></button>
+                <button onclick="downloadImage('${item.url}')" class="w-10 h-10 rounded-full bg-blue-500/80 hover:bg-blue-600 text-white flex items-center justify-center transition"><i class="fa-solid fa-download"></i></button>
+            </div>
+        `;
+                grid.appendChild(el);
+            });
+        }
+
+        /******** UTILS *********/
+        function scrollToBottom(force = false) {
+            const box = document.getElementById("chatbox");
+            const threshold = 100; // px
+            const isNearBottom = box.scrollHeight - box.scrollTop - box.clientHeight <= threshold;
+
+            if (force || isNearBottom) {
+                box.scrollTop = box.scrollHeight;
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem("astra_chats_v2", JSON.stringify(chats));
+        }
+
+        function clearAllData() {
+            if (confirm("Are you sure? This will delete all chats and gallery images.")) {
+                localStorage.removeItem("astra_chats_v2");
+                localStorage.removeItem("astra_gallery_v2");
+                location.reload();
+            }
+        }
+
+        // Modal
+        function openModal(url) {
+            const m = document.getElementById("imgModal");
+            document.getElementById("modalImg").src = url;
+            document.getElementById("downloadBtn").onclick = () => downloadImage(url);
+            m.classList.add("open");
+        }
+        function closeModal(e) {
+            if (e.target === document.getElementById("imgModal")) {
+                document.getElementById("imgModal").classList.remove("open");
+            }
+        }
+        function copyModalLink() {
+            const url = document.getElementById("modalImg").src;
+            navigator.clipboard.writeText(url);
+            alert("Copied to clipboard!");
+        }
+
+        async function downloadImage(url) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = "astra-generated-" + Date.now() + ".png";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                
+                // Fallback
+                window.open(url, '_blank');
+            }
+        }
+
+        /******** EXPORT PDF *********/
+        function exportChatPDF() {
+            if (!currentChat) return;
+
+            // Show loading state
+            const btn = document.querySelector('[onclick="exportChatPDF()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+
+            // Create container for PDF content using a visible overlay
+            // This is the most reliable way to ensure html2canvas captures valid pixels
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = '#ffffff';
+            overlay.style.zIndex = '99999'; // On top of everything
+            overlay.style.overflowY = 'scroll';
+            overlay.style.padding = '20px';
+
+            // Inner container for centering and sizing
+            const element = document.createElement('div');
+            element.className = 'p-8 bg-white font-sans';
+            element.style.color = 'black';
+            element.style.fontFamily = "'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+            element.style.maxWidth = '800px';
+            element.style.margin = '0 auto'; // Center it
+            element.style.width = '100%';
+
+            overlay.appendChild(element);
+            document.body.appendChild(overlay);
+
+            // Chat Title
+            element.innerHTML = `
+                <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                    <h1 style="font-size: 24px; color: #333; margin: 0;">${currentChat.title}</h1>
+                    <div style="font-size: 12px; color: #888; margin-top: 5px;">
+                        ${new Date().toLocaleString()}
+                    </div>
+                </div>
+            `;
+
+            // Inline Styles for Code
+            const codeBlockStyle = `
+                background: #1e1e1e !important;
+                color: #d4d4d4 !important;
+                padding: 10px;
+                border-radius: 6px;
+                font-family: monospace;
+                white-space: pre-wrap;
+                margin: 8px 0;
+                font-size: 11px;
+                page-break-inside: avoid;
+            `;
+
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.flexDirection = 'column';
+            container.style.gap = '20px';
+
+            currentChat.messages.forEach(msg => {
+                const isUser = msg.role === 'user';
+
+                // Flex Row wrapper
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.justifyContent = isUser ? 'flex-end' : 'flex-start';
+                row.style.width = '100%';
+
+                // CRITICAL: Prevent page break inside this message block
+                row.style.pageBreakInside = 'avoid';
+
+                // Bubble
+                const bubble = document.createElement('div');
+                bubble.style.padding = '12px 16px';
+                bubble.style.borderRadius = isUser ? '16px 0 16px 16px' : '0 16px 16px 16px';
+                bubble.style.maxWidth = '75%';
+                bubble.style.boxShadow = '0 1px 2px rgba(0,0,0,0.1)';
+
+                if (isUser) {
+                    bubble.style.background = '#2563eb';
+                    bubble.style.color = 'white';
+                } else {
+                    bubble.style.background = '#f1f5f9';
+                    bubble.style.color = '#334155';
+                    bubble.style.border = '1px solid #e2e8f0';
+                }
+
+                let contentHTML = "";
+                if (msg.isImage) {
+                    const urlMatch = msg.content.match(/\((.*?)\)/);
+                    const url = urlMatch ? urlMatch[1] : "";
+
+                    if (url) {
+                        contentHTML = `
+                            <div style="page-break-inside: avoid; break-inside: avoid; display: block; margin: 10px 0;">
+                                <img src="${url}" crossorigin="anonymous" 
+                                style="width: 100%; max-width: 400px; border-radius: 8px; display: block; height: auto;">
+                            </div>`;
+                    } else {
+                        contentHTML = `<em>[Image Error]</em>`;
+                    }
+                } else if (msg.role === 'bot') {
+                    contentHTML = marked.parse(msg.content);
+                } else {
+                    contentHTML = msg.content;
+                }
+
+                bubble.innerHTML = `
+                    <div class="pdf-content" style="font-size: 12px; line-height: 1.5;">
+                        ${contentHTML}
+                    </div>
+                `;
+
+                // Styling inner elements
+                bubble.querySelectorAll('a').forEach(a => {
+                    a.style.color = isUser ? '#bfdbfe' : '#2563eb';
+                    a.style.textDecoration = 'underline';
+                });
+
+                bubble.querySelectorAll('h1, h2, h3').forEach(h => {
+                    h.style.color = '#1e293b';
+                    h.style.fontWeight = 'bold';
+                    h.style.marginTop = '8px';
+                    h.style.marginBottom = '4px';
+                    h.style.borderBottom = 'none';
+                });
+
+                bubble.querySelectorAll('strong').forEach(s => {
+                    s.style.fontWeight = 'bold';
+                    s.style.color = isUser ? 'white' : 'black';
+                });
+
+                bubble.querySelectorAll('pre').forEach(pre => {
+                    pre.style.cssText = codeBlockStyle;
+                });
+
+                bubble.querySelectorAll('code').forEach(code => {
+                    if (!code.closest('pre')) {
+                        code.style.background = isUser ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.05)';
+                        code.style.padding = '2px 4px';
+                        code.style.borderRadius = '4px';
+                        code.style.fontFamily = 'monospace';
+                    } else {
+                        code.style.fontFamily = 'monospace';
+                        code.style.color = '#e2e8f0';
+                    }
+                });
+
+                row.appendChild(bubble);
+                container.appendChild(row);
+            });
+
+            element.appendChild(container);
+
+            // Wait for images to load
+            const images = element.querySelectorAll('img');
+            const promises = Array.from(images).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve; // Don't block on error
+                });
+            });
+
+            Promise.all(promises).then(() => {
+                const opt = {
+                    margin: [0.3, 0.4, 0.3, 0.4],
+                    filename: `Astra_Chat_Design_Export_${Date.now()}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        scrollY: 0,
+                        backgroundColor: '#ffffff'
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Small timeout to ensure DOM is fully repainted
+                setTimeout(() => {
+                    html2pdf().set(opt).from(element).save().then(() => {
+                        document.body.removeChild(overlay);
+                        btn.innerHTML = originalText;
+                    }).catch(err => {
+                    
+                        alert("PDF generation failed. Please check console.");
+                        document.body.removeChild(overlay);
+                        btn.innerHTML = originalText;
+                    });
+                }, 500);
+            });
+        }
+    </script>
+</body>
+
+</html>

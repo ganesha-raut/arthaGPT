@@ -1,0 +1,22 @@
+# Astra ChatBot - SEO Configuration
+
+## Allowed Crawlers
+User-agent: *
+Allow: /
+Disallow: /.netlify/
+Disallow: /netlify/
+Disallow: /.env
+Disallow: /node_modules/
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://astragpt2.netlify.app/sitemap.xml
