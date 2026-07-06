@@ -7,6 +7,7 @@ import { useChatStore, PERSONAS } from '../../store/chatStore';
 import { db } from '../../database/db';
 import { Chat } from '../../types';
 import { useLiveQuery } from 'dexie-react-hooks';
+import arthaLogo from '../../assets/arthagpt.png';
 
 interface SidebarProps {
   onOpenSettings: () => void;
@@ -20,6 +21,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenTemplates,
   onViewChange
 }) => {
+  const handleLogoFallback = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '/favicon-32x32.png';
+  };
+
   const {
     activeChatId,
     setActiveChatId,
@@ -287,7 +292,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="flex items-center gap-2.5 cursor-pointer hover:opacity-85 select-none"
             title="Go to Home Page"
           >
-            <img src="/arthagpt.png" className="w-6 h-6 rounded-full object-cover border border-[#17C7C9]/35" alt="Artha GPT Logo" />
+            <img src={arthaLogo} onError={handleLogoFallback} className="w-6 h-6 rounded-full object-cover border border-[#17C7C9]/35" alt="Artha GPT Logo" />
             <span className="font-bold text-sm tracking-tight text-white">Artha GPT</span>
           </div>
           

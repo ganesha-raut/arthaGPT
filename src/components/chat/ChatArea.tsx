@@ -9,6 +9,11 @@ import { Chat, Attachment } from '../../types';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { MessageItem } from '../message/MessageItem';
 import { PromptInput } from '../input/PromptInput';
+import arthaLogo from '../../assets/arthagpt.png';
+
+const handleLogoFallback = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  e.currentTarget.src = '/favicon-32x32.png';
+};
 
 interface ChatAreaProps {
   onOpenSettings: () => void;
@@ -352,7 +357,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
         {!activeChatId ? (
           /* Landing page when no chat is active */
           <div className="max-w-xl mx-auto px-4 h-full flex flex-col items-center justify-center text-center space-y-6 select-none animate-fade-in">
-            <img src="/arthagpt.png" className="w-16 h-16 rounded-full object-cover border-2 border-[#17C7C9]/40 shadow-lg shadow-[#17C7C9]/10" alt="Artha GPT logo" />
+            <img src={arthaLogo} onError={handleLogoFallback} className="w-16 h-16 rounded-full object-cover border-2 border-[#17C7C9]/40 shadow-lg shadow-[#17C7C9]/10" alt="Artha GPT logo" />
             <div className="space-y-2">
               <h2 className="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight">Welcome to Artha GPT Workspace</h2>
               <p className="text-sm text-zinc-450 leading-relaxed max-w-sm mx-auto">
@@ -372,7 +377,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
           /* Empty Chat state suggestions */
           <div className="max-w-2xl mx-auto px-4 pt-10 sm:pt-16 pb-8 h-full flex flex-col justify-between">
             <div className="flex flex-col items-center text-center space-y-4 my-auto select-none">
-              <img src="/arthagpt.png" className="w-12 h-12 rounded-full object-cover border border-[#17C7C9]/40 shadow-md shadow-[#17C7C9]/10" alt="Artha GPT logo" />
+              <img src={arthaLogo} onError={handleLogoFallback} className="w-12 h-12 rounded-full object-cover border border-[#17C7C9]/40 shadow-md shadow-[#17C7C9]/10" alt="Artha GPT logo" />
               <div>
                 <h3 className="text-base font-bold text-zinc-150">Artha GPT Sandbox</h3>
                 <p className="text-xs text-zinc-450 mt-1">Start by typing below, or use one of our templates.</p>

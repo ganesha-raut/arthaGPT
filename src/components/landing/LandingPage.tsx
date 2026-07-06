@@ -5,6 +5,8 @@ import {
   BarChart2, Search, Cpu, Zap, ArrowRight, Github, 
   Linkedin, ExternalLink, CheckCircle2
 } from 'lucide-react';
+import arthaLogo from '../../assets/arthagpt.png';
+import founderImage from '../../assets/ganesharaut.jpg';
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -12,6 +14,9 @@ interface LandingPageProps {
 
 export function LandingPage({ onGetStarted }: LandingPageProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const handleLogoFallback = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = '/favicon-32x32.png';
+  };
 
   const features = [
     {
@@ -99,7 +104,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       <header className="sticky top-0 z-40 w-full border-b border-zinc-900 bg-black/60 backdrop-blur-lg transition-all select-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <img src="/arthagpt.png" className="w-8 h-8 rounded-full object-cover border border-[#17C7C9]/40 shadow-lg shadow-[#17C7C9]/10" alt="Artha GPT Logo" />
+            <img src={arthaLogo} onError={handleLogoFallback} className="w-8 h-8 rounded-full object-cover border border-[#17C7C9]/40 shadow-lg shadow-[#17C7C9]/10" alt="Artha GPT Logo" />
             <span className="font-bold text-lg tracking-tight text-white">Artha GPT</span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm text-zinc-400 font-medium">
@@ -161,7 +166,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <div className="absolute inset-4 border border-dashed border-[#17C7C9]/25 rounded-full animate-spin-slow" />
             
             <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-black border-2 border-[#17C7C9]/85 flex items-center justify-center shadow-[0_0_50px_rgba(23,199,201,0.25)] hover:shadow-[0_0_60px_rgba(23,199,201,0.4)] transition-all duration-500 scale-100 hover:scale-105 z-10 cursor-pointer">
-              <img src="/arthagpt.png" className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover" alt="Artha GPT Hero Logo" />
+              <img src={arthaLogo} onError={handleLogoFallback} className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover" alt="Artha GPT Hero Logo" />
             </div>
 
             <div className="absolute -top-[5%] -left-[12%] bg-zinc-900/90 backdrop-blur-md border border-zinc-800 rounded-2xl p-3.5 w-60 text-left text-xs text-zinc-300 shadow-2xl flex gap-2.5">
@@ -299,7 +304,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-tr from-[#17C7C9]/10 to-[#F5B335]/15 blur-2xl pointer-events-none" />
 
             <div className="w-28 h-28 rounded-full border-2 border-[#17C7C9] flex-shrink-0 overflow-hidden shadow-lg shadow-[#17C7C9]/10">
-              <img src="/ganesharaut.jpg" className="w-full h-full object-cover" alt="Ganesh Santosh Raut" />
+              <img src={founderImage} onError={handleLogoFallback} className="w-full h-full object-cover" alt="Ganesh Santosh Raut" />
             </div>
 
             <div className="space-y-4 flex-1">
@@ -445,7 +450,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       <footer className="border-t border-zinc-900 bg-zinc-950/20 py-12 select-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <img src="/arthagpt.png" className="w-6 h-6 rounded-full object-cover" alt="Artha GPT Footer Logo" />
+            <img src={arthaLogo} onError={handleLogoFallback} className="w-6 h-6 rounded-full object-cover" alt="Artha GPT Footer Logo" />
             <span className="font-bold text-sm tracking-tight text-white">Artha GPT</span>
           </div>
 
