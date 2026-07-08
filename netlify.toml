@@ -43,4 +43,4 @@
     X-Frame-Options = ""
     
     # २. फक्त तुमच्या portfolio domains ला embed करण्याची परवानगी द्या:
-    Content-Security-Policy = "frame-ancestors 'self' https://ganeshraut.vercel.app/ http://localhost:3000/ https://ganesharaut.in/"
+    Content-Security-Policy = "frame-ancestors 'self' https://ganesharaut.in/ https://arthagpt.ganesharaut.in/"
